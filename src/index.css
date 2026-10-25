@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cyber-bg: #06090e;
+  --color-cyber-surface: #0a111a;
+  --color-cyber-panel: #0f1926;
+  --color-cyber-border: #18283d;
+  --color-cyber-border-bright: #284466;
+  --color-cyber-cyan: #00f0ff;
+  --color-cyber-green: #00ff66;
+  --color-cyber-purple: #a855f7;
+  --color-cyber-red: #ff3366;
+  --color-cyber-amber: #ffaa00;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Share Tech Mono', monospace;
+  --font-sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  background-color: #06090e;
+  color: #e2e8f0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #06090e;
+}
+::-webkit-scrollbar-thumb {
+  background: #18283d;
+  border-radius: 4px;
+  border: 1px solid #284466;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00f0ff44;
+}
+
+/* Cyber ambient grid */
+.cyber-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Scanline effect */
+.cyber-scanlines::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+/* Neon glow utilities */
+.glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+.glow-green {
+  text-shadow: 0 0 10px rgba(0, 255, 102, 0.5), 0 0 20px rgba(0, 255, 102, 0.2);
+}
+
+.box-glow-cyan {
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.15), inset 0 0 15px rgba(0, 240, 255, 0.05);
+}
+
+.box-glow-green {
+  box-shadow: 0 0 25px rgba(0, 255, 102, 0.15), inset 0 0 15px rgba(0, 255, 102, 0.05);
+}
+
+/* Tactical HUD corner cuts */
+.hud-corner {
+  position: relative;
+}
+.hud-corner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 10px 0;
+  border-color: transparent var(--color-cyber-cyan) transparent transparent;
+  opacity: 0.8;
+}
+
+/* Terminal blink cursor */
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.animate-cursor {
+  animation: blink 1s infinite;
+}
+
+/* Pulse radar animation */
+@keyframes radar-sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-radar {
+  animation: radar-sweep 6s linear infinite;
+}
