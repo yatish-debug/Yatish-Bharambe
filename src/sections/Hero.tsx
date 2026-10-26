@@ -45,7 +45,7 @@ export default function Hero() {
           'LOCATION: Jalgaon, Maharashtra, India',
           'GITHUB: https://github.com/yatish-debug',
           'LINKEDIN: https://linkedin.com/in/yatish-bharambe-050197330',
-          'CONTACT: yhbharmbe26@gmail.com | +91-8975512610',
+          'CONTACT: yhbharmbe26@gmail.com',
         ]
         break
       case 'honours':
@@ -98,7 +98,6 @@ export default function Hero() {
       case 'contact':
         result = [
           'EMAIL: yhbharmbe26@gmail.com',
-          'PHONE: +91-8975512610',
           'GITHUB: https://github.com/yatish-debug',
           'LINKEDIN: https://www.linkedin.com/in/yatish-bharambe-050197330',
           'LOCATION: Jalgaon, Maharashtra, India',
