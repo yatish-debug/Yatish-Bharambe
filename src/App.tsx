@@ -29,8 +29,11 @@ function App() {
         <Experience />
         <Certifications />
         <Achievements />
-        <CyberSandbox />
-        <Contact />
+        {/* Unified Comms & Live Sandbox Lab */}
+        <section id="comms-lab" className="space-y-12 scroll-mt-24">
+          <CyberSandbox />
+          <Contact />
+        </section>
       </main>
       <Footer />
     </div>

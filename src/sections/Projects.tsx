@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import SectionWrapper from '../components/SectionWrapper'
 import { projects, type Project } from '../data/projects'
-import { ExternalLink, FileText, ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Cpu } from 'lucide-react'
 import { GitHubIcon } from '../components/Icons'
 import { motion, AnimatePresence } from 'framer-motion'
+import ProjectModal from '../components/ProjectModal'
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState<string>('all')
@@ -25,9 +26,9 @@ export default function Projects() {
   return (
     <SectionWrapper
       id="projects"
-      badge="SECURITY ARSENAL"
+      badge="SECURITY ARSENAL // PRODUCTION TOOLS"
       title="Featured Projects"
-      subtitle="Production-grade threat intelligence platforms, offensive tools, and machine learning detection engines"
+      subtitle="Production-grade threat intelligence platforms, low-level offensive automation, and machine learning detection engines"
     >
       {/* Category Filter Tabs */}
       <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
@@ -147,40 +148,17 @@ export default function Projects() {
                       aria-label={`${project.title} Source Code on GitHub`}
                     >
                       <GitHubIcon className="w-4 h-4" />
-                      <span>Source</span>
-                    </a>
-                  )}
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-mono text-gray-300 hover:text-cyan-400 transition-colors"
-                      aria-label={`${project.title} Live Preview`}
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      <span>Live Demo</span>
-                    </a>
-                  )}
-                  {project.writeup && (
-                    <a
-                      href={project.writeup}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-mono text-gray-300 hover:text-cyan-400 transition-colors"
-                      aria-label={`${project.title} Architectural Writeup`}
-                    >
-                      <FileText className="w-4 h-4" />
-                      <span>Whitepaper</span>
+                      <span>Source Code</span>
                     </a>
                   )}
                 </div>
 
                 <button
                   onClick={() => setSelectedProject(project)}
-                  className="text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1 cursor-pointer"
+                  className="px-3 py-1.5 rounded-lg bg-cyan-950/60 hover:bg-cyan-500 hover:text-black border border-cyan-500/40 text-cyan-300 text-xs font-mono flex items-center gap-1.5 transition-all cursor-pointer shadow-[0_0_10px_rgba(0,240,255,0.15)]"
                 >
-                  <span>Specs</span>
+                  <Cpu className="w-3.5 h-3.5" />
+                  <span>Inspect Blueprint</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -189,65 +167,11 @@ export default function Projects() {
         </AnimatePresence>
       </div>
 
-      {/* Deep Dive Modal */}
-      {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="bg-[#09111c] border border-cyan-500/50 rounded-xl max-w-2xl w-full p-6 sm:p-8 space-y-5 relative shadow-[0_0_50px_rgba(0,240,255,0.2)] font-mono">
-            <button
-              onClick={() => setSelectedProject(null)}
-              className="absolute top-4 right-4 p-2 rounded text-gray-400 hover:text-white bg-[#0f1b2b] border border-[#1e344e] cursor-pointer"
-              aria-label="Close dialog"
-            >
-              ✕
-            </button>
-
-            <div className="space-y-1">
-              <span className="text-cyan-400 text-xs">SYSTEM_SPECIFICATION // {selectedProject.category.toUpperCase()}</span>
-              <h3 className="text-2xl font-bold text-white font-sans">{selectedProject.title}</h3>
-              <p className="text-gray-400 text-xs">// {selectedProject.tagline}</p>
-            </div>
-
-            <div className="bg-[#05080e] p-4 rounded border border-[#16273b] space-y-3 text-xs">
-              <div className="text-cyan-300 font-semibold uppercase">Architectural Summary:</div>
-              <p className="text-gray-300 leading-relaxed font-sans text-sm">
-                {selectedProject.description}
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <div className="text-xs text-gray-400 uppercase">Operational Telemetry:</div>
-              <div className="grid grid-cols-3 gap-2">
-                {selectedProject.metrics.map((m, i) => (
-                  <div key={i} className="bg-[#0e1826] p-2.5 rounded border border-[#1a2f47] text-center">
-                    <div className="text-cyan-400 font-bold text-sm">{m.value}</div>
-                    <div className="text-gray-500 text-[10px]">{m.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="pt-2 flex justify-end gap-3">
-              {selectedProject.github && (
-                <a
-                  href={selectedProject.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 rounded bg-cyan-500 text-black font-semibold text-xs flex items-center gap-1.5"
-                >
-                  <GitHubIcon className="w-4 h-4" />
-                  View Repository
-                </a>
-              )}
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="px-4 py-2 rounded bg-[#0f1b2b] text-gray-300 hover:text-white text-xs border border-[#1e344e]"
-              >
-                Close Spec
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Interactive Blueprint Modal */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </SectionWrapper>
   )
 }

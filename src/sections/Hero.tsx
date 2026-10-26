@@ -102,7 +102,7 @@ export default function Hero() {
           'GITHUB: https://github.com/yatish-debug',
           'LINKEDIN: https://www.linkedin.com/in/yatish-bharambe-050197330',
           'LOCATION: Jalgaon, Maharashtra, India',
-          'PORTFOLIO: https://yatish-bharambe.vercel.app/',
+          'PORTFOLIO: https://yatish-bharambe-sigma.vercel.app/',
           'AVAILABILITY: Open for Penetration Testing, SOC & Security Engineering Roles',
         ]
         break
@@ -174,18 +174,22 @@ export default function Hero() {
             </p>
 
             {/* Quick telemetry indicators */}
-            <div className="grid grid-cols-3 gap-3 py-2 max-w-lg">
-              <div className="bg-[#0b1420] border border-[#18283d] p-3 rounded">
-                <div className="text-cyan-400 font-mono font-bold text-lg sm:text-xl">15+ Mos</div>
-                <div className="text-gray-400 text-xs font-mono">Hands-on Experience</div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 py-2 max-w-xl">
+              <div className="bg-[#0b1420] border border-sky-500/30 hover:border-sky-400 p-3 rounded-lg transition-colors">
+                <div className="text-sky-300 font-mono font-bold text-sm sm:text-base">NASA HOF</div>
+                <div className="text-gray-400 text-[11px] font-mono">VDP Inducted</div>
               </div>
-              <div className="bg-[#0b1420] border border-[#18283d] p-3 rounded">
-                <div className="text-emerald-400 font-mono font-bold text-lg sm:text-xl">7 Global</div>
-                <div className="text-gray-400 text-xs font-mono">Certifications</div>
+              <div className="bg-[#0b1420] border border-cyan-500/30 hover:border-cyan-400 p-3 rounded-lg transition-colors">
+                <div className="text-cyan-300 font-mono font-bold text-sm sm:text-base">Rank #2</div>
+                <div className="text-gray-400 text-[11px] font-mono">World Shellcraft</div>
               </div>
-              <div className="bg-[#0b1420] border border-[#18283d] p-3 rounded">
-                <div className="text-purple-400 font-mono font-bold text-lg sm:text-xl">3.968</div>
-                <div className="text-gray-400 text-xs font-mono">MIT Diploma GPA</div>
+              <div className="bg-[#0b1420] border border-emerald-500/30 hover:border-emerald-400 p-3 rounded-lg transition-colors">
+                <div className="text-emerald-300 font-mono font-bold text-sm sm:text-base">2x Winner</div>
+                <div className="text-gray-400 text-[11px] font-mono">MIT & IIT CTF</div>
+              </div>
+              <div className="bg-[#0b1420] border border-purple-500/30 hover:border-purple-400 p-3 rounded-lg transition-colors">
+                <div className="text-purple-300 font-mono font-bold text-sm sm:text-base">Top 0.5%</div>
+                <div className="text-gray-400 text-[11px] font-mono">TryHackMe & HTB</div>
               </div>
             </div>
 

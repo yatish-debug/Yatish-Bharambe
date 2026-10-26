@@ -1,13 +1,17 @@
+import { useState } from 'react'
 import SectionWrapper from '../components/SectionWrapper'
-import { certifications } from '../data/certifications'
-import { ExternalLink, ShieldCheck } from 'lucide-react'
+import { certifications, type Certification } from '../data/certifications'
+import { ShieldCheck, ArrowUpRight } from 'lucide-react'
 import { motion } from 'framer-motion'
+import CredentialModal from '../components/CredentialModal'
 
 export default function Certifications() {
+  const [selectedCert, setSelectedCert] = useState<Certification | null>(null)
+
   return (
     <SectionWrapper
       id="certifications"
-      badge="CREDENTIAL VAULT"
+      badge="CREDENTIAL VAULT // ACCREDITATIONS"
       title="Certifications & Accreditations"
       subtitle="Industry-standard security credentials validating offensive tradecraft and defensive architecture"
     >
@@ -60,7 +64,7 @@ export default function Certifications() {
               </div>
 
               {/* Description */}
-              <p className="text-gray-300 text-xs leading-relaxed font-sans">
+              <p className="text-gray-300 text-xs leading-relaxed font-sans line-clamp-3">
                 {cert.description}
               </p>
 
@@ -68,7 +72,7 @@ export default function Certifications() {
               <div className="space-y-1.5 pt-1">
                 <span className="text-[10px] font-mono text-gray-500 uppercase">Core Competencies:</span>
                 <div className="flex flex-wrap gap-1">
-                  {cert.skillsCovered.map((skill, sIdx) => (
+                  {cert.skillsCovered.slice(0, 3).map((skill, sIdx) => (
                     <span
                       key={sIdx}
                       className="px-2 py-0.5 rounded bg-[#05080e] border border-[#152438] text-[10px] font-mono text-gray-300"
@@ -76,29 +80,39 @@ export default function Certifications() {
                       {skill}
                     </span>
                   ))}
+                  {cert.skillsCovered.length > 3 && (
+                    <span className="px-1.5 py-0.5 text-[10px] font-mono text-cyan-400">
+                      +{cert.skillsCovered.length - 3} more
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
 
-            {/* Credential ID & External Link */}
+            {/* Credential ID & Action Buttons */}
             <div className="pt-3 border-t border-[#152336] flex items-center justify-between text-xs font-mono">
               <div className="text-gray-500 text-[11px]">
                 ID: <span className="text-gray-300">{cert.credentialId}</span>
               </div>
-              <a
-                href={cert.verificationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 transition-colors"
-                aria-label={`Verify ${cert.name} on ${cert.issuer}`}
+
+              <button
+                onClick={() => setSelectedCert(cert)}
+                className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer bg-cyan-950/40 hover:bg-cyan-950/80 px-2.5 py-1 rounded border border-cyan-500/30"
+                aria-label={`Inspect ${cert.name} verified credentials`}
               >
-                <span>Verify</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
+                <span>Audit Dossier</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </button>
             </div>
           </motion.div>
         ))}
       </div>
+
+      {/* Credential Modal */}
+      <CredentialModal
+        cert={selectedCert}
+        onClose={() => setSelectedCert(null)}
+      />
     </SectionWrapper>
   )
 }

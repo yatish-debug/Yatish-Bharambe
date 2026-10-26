@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import SectionWrapper from '../components/SectionWrapper'
-import Button from '../components/Button'
 import { socialLinks, contactInfo } from '../data/contact'
-import { Mail, MapPin, Send, Key, Copy, Check, ShieldCheck, Terminal, Phone } from 'lucide-react'
+import { Mail, MapPin, Send, Key, Copy, Check, Terminal, Phone, Clock } from 'lucide-react'
+import { LinkedInIcon } from '../components/Icons'
 import { motion } from 'framer-motion'
 
 export default function Contact() {
@@ -15,6 +15,7 @@ export default function Contact() {
   })
 
   const [copiedKey, setCopiedKey] = useState(false)
+  const [copiedPayload, setCopiedPayload] = useState(false)
   const [isTransmitting, setIsTransmitting] = useState(false)
   const [transmitted, setTransmitted] = useState(false)
 
@@ -27,11 +28,13 @@ export default function Contact() {
       setTransmitted(true)
 
       // Open email client with prepared data
-      const mailtoUrl = `mailto:${contactInfo.email}?subject=[${formData.classification.toUpperCase()}] ${encodeURIComponent(formData.subject || 'Security Consultation')}&body=${encodeURIComponent(
+      const mailtoUrl = `mailto:${contactInfo.email}?subject=[${formData.classification.toUpperCase()}] ${encodeURIComponent(
+        formData.subject || 'Security Consultation'
+      )}&body=${encodeURIComponent(
         `Operator: ${formData.name}\nEmail: ${formData.email}\nClassification: ${formData.classification}\n\nMessage Payload:\n${formData.message}`
       )}`
       window.location.href = mailtoUrl
-    }, 1200)
+    }, 800)
   }
 
   const handleChange = (
@@ -49,10 +52,17 @@ export default function Contact() {
     setTimeout(() => setCopiedKey(false), 2000)
   }
 
+  const copyMessagePayload = () => {
+    const payload = `Operator: ${formData.name || 'Anonymous Recruiter'}\nEmail: ${formData.email || 'N/A'}\nSubject: ${formData.subject || 'Security Engagement'}\n\nMessage:\n${formData.message || 'Ready to discuss security role.'}`
+    navigator.clipboard.writeText(payload)
+    setCopiedPayload(true)
+    setTimeout(() => setCopiedPayload(false), 2000)
+  }
+
   return (
     <SectionWrapper
       id="contact"
-      badge="ENCRYPTED CHANNEL"
+      badge="ENCRYPTED CHANNEL // DIRECT COMMS"
       title="Secure Communications"
       subtitle="Establish contact for ethical hacking, penetration testing, vulnerability assessment, or security operations"
     >
@@ -66,11 +76,40 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="lg:col-span-5 space-y-6"
         >
-          <div className="space-y-3">
-            <h3 className="text-2xl font-bold text-white font-sans">Initialize Comms</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              Available for penetration testing, vulnerability assessment, incident response, and security operations roles. Sensitive communications can be encrypted using my PGP public key.
+          {/* Fast-Track Interview Screen Box */}
+          <div className="bg-gradient-to-r from-cyan-950/40 via-[#0d1c2e] to-emerald-950/30 border border-cyan-500/40 rounded-xl p-5 space-y-3 font-mono text-xs shadow-lg">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] text-cyan-400 font-bold tracking-widest uppercase">
+                FAST-TRACK INTERVIEW
+              </span>
+              <span className="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-500/30 font-semibold">
+                AVAILABLE NOW
+              </span>
+            </div>
+            <h4 className="text-white text-sm font-bold font-sans">
+              Looking to Hire or Schedule a Technical Screen?
+            </h4>
+            <p className="text-gray-300 text-xs font-sans leading-relaxed">
+              Open for Penetration Testing, SOC Analyst, Red Team & Security Engineering positions (Full-Time, Contract & Hybrid).
             </p>
+            <div className="flex flex-wrap gap-2 pt-1">
+              <a
+                href={`mailto:${contactInfo.email}?subject=Interview%20Invitation%20-%20Security%20Role&body=Hi%20Yatish,%20we%20reviewed%20your%20portfolio%20and%20would%20like%20to%20schedule%20a%20technical%20screen.`}
+                className="px-3.5 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs flex items-center gap-1.5 transition-all shadow-[0_0_15px_rgba(0,240,255,0.3)]"
+              >
+                <Mail className="w-3.5 h-3.5" />
+                <span>Request Interview</span>
+              </a>
+              <a
+                href={contactInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3.5 py-1.5 rounded-lg bg-[#0e1929] hover:bg-[#142338] text-cyan-300 border border-cyan-500/30 text-xs flex items-center gap-1.5 transition-all"
+              >
+                <LinkedInIcon className="w-3.5 h-3.5" />
+                <span>LinkedIn Message</span>
+              </a>
+            </div>
           </div>
 
           {/* Contact Details Card */}
@@ -117,11 +156,11 @@ export default function Contact() {
 
             <div className="flex items-center gap-3">
               <div className="p-2.5 bg-cyan-950/50 border border-cyan-500/30 rounded-lg text-cyan-400">
-                <ShieldCheck className="w-4 h-4" />
+                <Clock className="w-4 h-4" />
               </div>
               <div>
                 <p className="text-gray-400 text-[11px]">Response SLA</p>
-                <p className="text-emerald-400 font-semibold">&lt; 12 Hours // Security Incidents</p>
+                <p className="text-emerald-400 font-semibold">&lt; 12 Hours // High Priority</p>
               </div>
             </div>
           </div>
@@ -208,12 +247,23 @@ export default function Contact() {
                 <p className="text-gray-300 text-xs max-w-sm mx-auto leading-relaxed font-sans">
                   Your mail client has been opened with the structured payload. Alternatively, email directly to <span className="text-cyan-400 font-mono">{contactInfo.email}</span>.
                 </p>
-                <button
-                  onClick={() => setTransmitted(false)}
-                  className="px-4 py-2 rounded bg-cyan-500 text-black font-semibold text-xs cursor-pointer hover:bg-cyan-400"
-                >
-                  TRANSMIT ANOTHER MESSAGE
-                </button>
+
+                <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                  <button
+                    onClick={copyMessagePayload}
+                    className="px-4 py-2 rounded bg-[#0f1d30] border border-cyan-500/40 text-cyan-300 font-semibold text-xs cursor-pointer hover:bg-cyan-950 flex items-center gap-1.5"
+                  >
+                    {copiedPayload ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedPayload ? 'PAYLOAD COPIED' : 'COPY MESSAGE PAYLOAD'}</span>
+                  </button>
+
+                  <button
+                    onClick={() => setTransmitted(false)}
+                    className="px-4 py-2 rounded bg-cyan-500 text-black font-semibold text-xs cursor-pointer hover:bg-cyan-400"
+                  >
+                    TRANSMIT ANOTHER MESSAGE
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -262,58 +312,68 @@ export default function Contact() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      placeholder="e.g. Red Team Assessment Request"
+                      placeholder="e.g. Pentest RFP / Job Opportunity"
                       className="w-full px-3.5 py-2.5 bg-[#05080e] border border-[#1b2f48] focus:border-cyan-400 rounded text-white text-xs focus:outline-none"
                     />
                   </div>
                   <div className="space-y-1.5">
                     <label htmlFor="contact-classification" className="text-gray-300 block">
-                      CLASSIFICATION_TIER
+                      CLASSIFICATION_LEVEL
                     </label>
                     <select
                       id="contact-classification"
                       name="classification"
                       value={formData.classification}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 bg-[#05080e] border border-[#1b2f48] focus:border-cyan-400 rounded text-white text-xs focus:outline-none cursor-pointer"
+                      className="w-full px-3.5 py-2.5 bg-[#05080e] border border-[#1b2f48] focus:border-cyan-400 rounded text-white text-xs focus:outline-none"
                     >
-                      <option value="standard">STANDARD // GENERAL CONSULT</option>
+                      <option value="standard">UNCLASSIFIED // GENERAL INQUIRY</option>
                       <option value="confidential">CONFIDENTIAL // RED TEAM OP</option>
-                      <option value="critical">CRITICAL // ZERO-DAY DISCLOSURE</option>
+                      <option value="urgent">URGENT // IMMEDIATE RECRUITING</option>
+                      <option value="contract">CONTRACT // VULN ASSESSMENT</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
                   <label htmlFor="contact-message" className="text-gray-300 block">
-                    PAYLOAD_BODY (MESSAGE) *
+                    TRANSMISSION_PAYLOAD *
                   </label>
                   <textarea
                     id="contact-message"
                     name="message"
+                    rows={5}
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows={5}
-                    placeholder="Provide scope, targets, or inquiry details..."
-                    className="w-full px-3.5 py-2.5 bg-[#05080e] border border-[#1b2f48] focus:border-cyan-400 rounded text-white text-xs focus:outline-none resize-none"
+                    placeholder="Enter mission parameters, scope, target schedule, or recruiting opportunity..."
+                    className="w-full px-3.5 py-2.5 bg-[#05080e] border border-[#1b2f48] focus:border-cyan-400 rounded text-white text-xs focus:outline-none resize-none font-mono"
                   ></textarea>
                 </div>
 
-                <Button
-                  type="submit"
-                  variant="primary"
-                  size="lg"
-                  className="w-full justify-center text-xs tracking-wider"
-                  disabled={isTransmitting}
-                >
-                  <Send className={`w-4 h-4 ${isTransmitting ? 'animate-bounce' : ''}`} />
-                  <span>
-                    {isTransmitting
-                      ? 'COMPUTING HANDSHAKE & TRANSMITTING...'
-                      : 'DISPATCH SECURE TRANSMISSION'}
+                <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
+                  <span className="text-[10px] text-gray-500">
+                    [!] All dispatches dispatched directly to operator encrypted mailbox.
                   </span>
-                </Button>
+
+                  <button
+                    type="submit"
+                    disabled={isTransmitting}
+                    className="px-6 py-2.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs flex items-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all disabled:opacity-50"
+                  >
+                    {isTransmitting ? (
+                      <>
+                        <span className="w-3.5 h-3.5 border-2 border-black border-t-transparent rounded-full animate-spin"></span>
+                        <span>TRANSMITTING...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-3.5 h-3.5" />
+                        <span>DISPATCH TRANSMISSION</span>
+                      </>
+                    )}
+                  </button>
+                </div>
               </form>
             )}
           </div>

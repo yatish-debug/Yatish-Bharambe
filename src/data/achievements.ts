@@ -19,7 +19,8 @@ export interface AchievementItem {
   description: string
   highlights: string[]
   proofType: string
-  accentColor: string // hex code for glowing effects
+  verificationLink?: string
+  accentColor: string
   badgeBg: string
   badgeText: string
   badgeBorder: string
@@ -58,6 +59,7 @@ export const achievements: AchievementItem[] = [
       'Secured formal Hall of Fame listing on official NASA acknowledgment roster',
     ],
     proofType: 'NASA VDP Security Hall of Fame Acknowledgment',
+    verificationLink: 'https://www.nasa.gov/vulnerability-disclosure-policy/',
     accentColor: '#38bdf8',
     badgeBg: 'bg-sky-950/40',
     badgeText: 'text-sky-300',
@@ -87,6 +89,7 @@ export const achievements: AchievementItem[] = [
       'Engineered speed-exploits across memory corruption, web pwn, and cryptographic challenges',
     ],
     proofType: 'MIT Boston FLAGHUNT 2026 Official Leaderboard',
+    verificationLink: 'https://flaghunt.mit.edu',
     accentColor: '#a855f7',
     badgeBg: 'bg-purple-950/40',
     badgeText: 'text-purple-300',
@@ -116,6 +119,7 @@ export const achievements: AchievementItem[] = [
       'Conquered advanced binary exploitation, reverse engineering, web security, and blockchain challenges',
     ],
     proofType: 'Hack The Box Global Leaderboard & Team Stats',
+    verificationLink: 'https://app.hackthebox.com',
     accentColor: '#00ff66',
     badgeBg: 'bg-emerald-950/40',
     badgeText: 'text-emerald-300',
@@ -145,6 +149,7 @@ export const achievements: AchievementItem[] = [
       'Demonstrated elite lateral movement and digital forensic artifact extraction',
     ],
     proofType: 'IIT Bombay HackConquest Official Result & Citation',
+    verificationLink: 'https://techfest.org',
     accentColor: '#fbbf24',
     badgeBg: 'bg-amber-950/40',
     badgeText: 'text-amber-300',
@@ -174,6 +179,7 @@ export const achievements: AchievementItem[] = [
       'Advanced hands-on expertise in BloodHound, Kerberoasting, and multi-host pivoting',
     ],
     proofType: 'TryHackMe Verified Public Profile & Rank Metrics',
+    verificationLink: 'https://tryhackme.com',
     accentColor: '#ff3366',
     badgeBg: 'bg-rose-950/40',
     badgeText: 'text-rose-300',
@@ -210,6 +216,7 @@ export const achievements: AchievementItem[] = [
       'Core foundation enabling custom exploit compilation and fast payload creation',
     ],
     proofType: 'HackerRank Verified Domain Leaderboards',
+    verificationLink: 'https://www.hackerrank.com',
     accentColor: '#00f0ff',
     badgeBg: 'bg-cyan-950/40',
     badgeText: 'text-cyan-300',
@@ -239,6 +246,7 @@ export const achievements: AchievementItem[] = [
       'High-velocity problem solving under strict computational constraints',
     ],
     proofType: 'LeetCode Public Competitive Profile',
+    verificationLink: 'https://leetcode.com',
     accentColor: '#f97316',
     badgeBg: 'bg-orange-950/40',
     badgeText: 'text-orange-300',
@@ -268,6 +276,7 @@ export const achievements: AchievementItem[] = [
       'Commended by Adobe engineering panel for robust threat modeling and clean implementation',
     ],
     proofType: 'Adobe India Hackathon 2024 Certificate of Placement',
+    verificationLink: 'https://www.adobe.com',
     accentColor: '#f43f5e',
     badgeBg: 'bg-rose-950/40',
     badgeText: 'text-rose-300',

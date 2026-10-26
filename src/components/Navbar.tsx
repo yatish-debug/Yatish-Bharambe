@@ -13,13 +13,13 @@ export default function Navbar() {
       setScrolled(window.scrollY > 20)
 
       // Update active section based on scroll position
-      const sections = navLinks.map((l) => l.href.substring(1))
-      for (const section of sections.reverse()) {
+      const sections = ['contact', ...navLinks.map((l) => l.href.substring(1)).reverse()]
+      for (const section of sections) {
         const el = document.getElementById(section)
         if (el) {
           const rect = el.getBoundingClientRect()
-          if (rect.top <= 120) {
-            setActiveSection(section)
+          if (rect.top <= 140) {
+            setActiveSection(section === 'contact' ? 'sandbox' : section)
             break
           }
         }
@@ -70,20 +70,20 @@ export default function Navbar() {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-1" aria-label="Main Navigation">
+          <nav className="hidden lg:flex items-center space-x-0.5 xl:space-x-1" aria-label="Main Navigation">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.substring(1)
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`px-3 py-1.5 rounded text-xs font-mono tracking-wider transition-all duration-200 flex items-center gap-1.5 ${
+                  className={`px-2.5 py-1.5 rounded-lg text-xs font-mono tracking-wide transition-all duration-200 flex items-center gap-1 whitespace-nowrap ${
                     isActive
-                      ? 'text-cyan-400 bg-cyan-950/30 border border-cyan-500/30 shadow-[0_0_10px_rgba(0,240,255,0.15)]'
-                      : 'text-gray-300 hover:text-cyan-300 hover:bg-gray-800/40 border border-transparent'
+                      ? 'text-cyan-300 bg-cyan-950/60 border border-cyan-500/40 shadow-[0_0_12px_rgba(0,240,255,0.2)]'
+                      : 'text-gray-300 hover:text-cyan-300 hover:bg-[#0c1524] border border-transparent'
                   }`}
                 >
-                  <span className="text-[10px] text-cyan-500/60 font-semibold">{link.code}.</span>
+                  <span className="text-[10px] text-cyan-500/70 font-semibold">{link.code}.</span>
                   <span>{link.name}</span>
                 </a>
               )
@@ -91,8 +91,8 @@ export default function Navbar() {
           </nav>
 
           {/* Right Action: Defense Status & Contact CTA */}
-          <div className="hidden sm:flex items-center gap-3">
-            <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded bg-[#0a111a] border border-[#18283d] text-[11px] font-mono text-gray-400">
+          <div className="hidden sm:flex items-center gap-2.5">
+            <div className="hidden 2xl:flex items-center gap-2 px-3 py-1.5 rounded bg-[#0a111a] border border-[#18283d] text-[11px] font-mono text-gray-400">
               <Cpu className="w-3.5 h-3.5 text-cyan-400" />
               <span>SOC:</span>
               <span className="text-emerald-400 font-semibold">ACTIVE DEFENSE</span>
@@ -101,7 +101,7 @@ export default function Navbar() {
               href="#contact"
               variant="secondary"
               size="sm"
-              className="text-xs tracking-wider"
+              className="text-xs tracking-wider whitespace-nowrap"
             >
               <ShieldAlert className="w-3.5 h-3.5" />
               INTEL_DISPATCH

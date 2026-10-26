@@ -95,9 +95,9 @@ export default function CyberSandbox() {
   return (
     <SectionWrapper
       id="sandbox"
-      badge="LIVE DEFENSE LAB"
-      title="Interactive Cyber Sandbox"
-      subtitle="Interact with live security utilities: real-time cryptanalytic hashing, entropy modeling, and firewall posture testing"
+      badge="LIVE DEFENSE LAB // INTERACTIVE SANDBOX"
+      title="Cyber Sandbox & Defense Lab"
+      subtitle="Interact with live security utilities: real-time cryptanalytic hashing, entropy modeling, and firewall posture testing before initializing secure comms."
     >
       <div className="max-w-4xl mx-auto bg-[#080e18] border border-[#18283d] rounded-2xl overflow-hidden shadow-2xl font-mono">
         {/* Lab Header Tabs */}
