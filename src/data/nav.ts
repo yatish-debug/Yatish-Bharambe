@@ -5,6 +5,7 @@ export const navLinks = [
   { name: 'Skills', href: '#skills', code: '04' },
   { name: 'Operations', href: '#experience', code: '05' },
   { name: 'Credentials', href: '#certifications', code: '06' },
-  { name: 'Cyber Sandbox', href: '#sandbox', code: '07' },
-  { name: 'Comms', href: '#contact', code: '08' },
+  { name: 'Honors', href: '#achievements', code: '07' },
+  { name: 'Cyber Sandbox', href: '#sandbox', code: '08' },
+  { name: 'Comms', href: '#contact', code: '09' },
 ]

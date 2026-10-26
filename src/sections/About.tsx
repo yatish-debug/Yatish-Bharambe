@@ -36,6 +36,8 @@ export default function About() {
     { label: 'Operator Name', value: 'Yatish Hemant Bharambe' },
     { label: 'Location', value: 'Jalgaon, Maharashtra, India' },
     { label: 'Primary Focus', value: 'Ethical Hacking & Pentesting' },
+    { label: 'VDP Recognition', value: 'NASA Hall of Fame Inductee' },
+    { label: 'CTF Accolades', value: 'MIT Boston & IIT Bombay Winner' },
     { label: 'MIT Diploma GPA', value: '3.968 / 4.0' },
     { label: 'B.Tech Program', value: 'Cybersecurity Engineering' },
     { label: 'Core Frameworks', value: 'MITRE ATT&CK, NIST CSF, OWASP' },

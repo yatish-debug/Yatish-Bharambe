@@ -6,6 +6,7 @@ import Skills from './sections/Skills'
 import Projects from './sections/Projects'
 import Experience from './sections/Experience'
 import Certifications from './sections/Certifications'
+import Achievements from './sections/Achievements'
 import CyberSandbox from './sections/CyberSandbox'
 import Contact from './sections/Contact'
 import TacticalCursor from './components/TacticalCursor'
@@ -27,6 +28,7 @@ function App() {
         <Projects />
         <Experience />
         <Certifications />
+        <Achievements />
         <CyberSandbox />
         <Contact />
       </main>

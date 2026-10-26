@@ -30,6 +30,7 @@ export default function Hero() {
           '  skills          - Technical weapons & defense proficiencies',
           '  projects        - Featured security tools & research projects',
           '  certs           - Verified industry certifications (OSCP, CEH, CCNA, eWPT, etc.)',
+          '  honours         - All 8 verified achievements & global rankings',
           '  contact         - Direct communication channels & endpoints',
           '  clear           - Purge terminal buffer',
           '  cat flag.txt    - CTF challenge inspection',
@@ -45,6 +46,24 @@ export default function Hero() {
           'GITHUB: https://github.com/yatish-debug',
           'LINKEDIN: https://linkedin.com/in/yatish-bharambe-050197330',
           'CONTACT: yhbharmbe26@gmail.com | +91-8975512610',
+        ]
+        break
+      case 'honours':
+      case 'honors':
+      case 'achievements':
+      case 'awards':
+        result = [
+          '==================== [ VERIFIED HONORS & ACCOLADES ] ====================',
+          '1. [NASA] Hall Of Fame Under Vulnerability Disclosure Policy (VDP)',
+          '2. [HTB] Cyber Apocalypse CTF 2026: Global Team Rank #14 & Best Team Leader Rank #3 Worldwide',
+          '3. [TRYHACKME] Global Ranking #165 & Top 0.5% (Elite Practitioner)',
+          '4. [LEETCODE] DSA (C++) Global Rank #16,523 Worldwide',
+          '5. [HACKERRANK] C Global Rank #12, C++ Global Rank #7, Python #16, Bash & Shell Rank #2',
+          '6. [ADOBE] Adobe India Hackathon Runner Up (2024)',
+          '7. [IIT BOMBAY] HackConquest CTF 2025 - 1st Place Winner & Champion',
+          '8. [MIT BOSTON] MIT Boston FLAGHUNT 2026 - Winner & Global Individual Lead Rank #3',
+          '--------------------------------------------------------------------------',
+          'Status: All 8 records verified. Scroll down to #achievements for full audit.',
         ]
         break
       case 'skills':
@@ -238,7 +257,7 @@ export default function Hero() {
               {/* Quick Prompt Chips */}
               <div className="bg-[#0a121c] px-3 py-2 border-t border-[#18283d] flex flex-wrap gap-1.5 items-center">
                 <span className="text-[10px] text-gray-500 uppercase mr-1">Chips:</span>
-                {['whoami', 'skills', 'projects', 'certs', 'clear'].map((chip) => (
+                {['whoami', 'skills', 'projects', 'certs', 'honours', 'clear'].map((chip) => (
                   <button
                     key={chip}
                     onClick={() => handleCommand(chip)}
@@ -256,7 +275,7 @@ export default function Hero() {
                   type="text"
                   value={terminalInput}
                   onChange={(e) => setTerminalInput(e.target.value)}
-                  placeholder="type command (e.g. whoami, help, flag)..."
+                  placeholder="type command (e.g. whoami, honours, help)..."
                   className="w-full bg-transparent text-white focus:outline-none text-xs placeholder-gray-600 font-mono"
                   aria-label="Interactive terminal command prompt"
                 />
